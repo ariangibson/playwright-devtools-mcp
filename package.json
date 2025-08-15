@@ -1,6 +1,6 @@
 {
   "name": "playwright-devtools-mcp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A specialized MCP server providing AI models with comprehensive Chrome DevTools access through Playwright for autonomous debugging, performance analysis, and security inspection",
   "type": "module",
   "main": "src/index.js",

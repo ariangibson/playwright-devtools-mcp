@@ -1,6 +1,7 @@
 import { chromium, firefox, webkit } from 'playwright';
 import { getConfig } from '../config/defaults.js';
 import { ConsoleCollector, NetworkCollector, PerformanceCollector } from './data-collector.js';
+import { BrowserHealthChecker, NavigationGuard } from './health-checker.js';
 
 class BrowserManager {
   constructor() {
@@ -9,6 +10,8 @@ class BrowserManager {
     this.config = getConfig();
     this.activePages = 0;
     this.dataCollectors = new Map(); // contextId -> collectors
+    this.healthChecker = new BrowserHealthChecker(this);
+    this.navigationGuard = new NavigationGuard(this, this.healthChecker);
   }
 
   async launchBrowser() {
@@ -204,6 +207,8 @@ class BrowserManager {
         await contextData.context.close();
         this.contexts.delete(contextId);
         this.dataCollectors.delete(contextId); // Clean up collectors
+        this.healthChecker.clearHealthData(contextId); // Clean up health data
+        this.navigationGuard.resetAttempts(contextId); // Reset navigation attempts
         this.log(`Closed browser context: ${contextId}`);
       } catch (error) {
         this.log(`Error closing context ${contextId}: ${error.message}`);

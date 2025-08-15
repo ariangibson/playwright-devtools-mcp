@@ -34,9 +34,11 @@ async function main() {
     console.error('✅ Playwright DevTools MCP Server started successfully');
     console.error('🔧 Available tools:');
     console.error('   📱 Browser: browser_launch, browser_navigate, browser_close');
+    console.error('   🛡️ Safety: browser_navigate_safe, browser_health_check, browser_force_recreate');
     console.error('   🐛 Console: console_get_logs, console_clear_logs, console_evaluate_javascript');
     console.error('   🌐 Network: network_get_requests, network_get_failed_requests, network_clear_requests');
     console.error('   ⚡ Performance: performance_get_metrics, performance_get_core_vitals');
+    console.error('   💾 Storage: storage_get_local_storage, storage_get_session_storage, storage_get_cookies, storage_clear_data');
     
   } catch (error) {
     console.error('❌ Failed to start MCP server:', error);

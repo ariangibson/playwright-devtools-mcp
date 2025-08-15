@@ -1,8 +1,10 @@
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import { browserLaunchTool, browserNavigateTool, browserCloseTool } from './tools/browser.js';
+import { browserNavigateSafeTool, browserHealthCheckTool, browserForceRecreateTool } from './tools/browser-safe.js';
 import { consoleGetLogsTool, consoleClearLogsTool, consoleEvaluateJavaScriptTool } from './tools/console.js';
 import { networkGetRequestsTool, networkGetFailedRequestsTool, networkClearRequestsTool } from './tools/network.js';
 import { performanceGetMetricsTool, performanceGetCoreVitalsTool } from './tools/performance.js';
+import { storageGetLocalStorageTool, storageGetSessionStorageTool, storageGetCookiesTool, storageClearDataTool } from './tools/storage.js';
 
 // Registry of all available tools
 const TOOLS = [
@@ -10,6 +12,11 @@ const TOOLS = [
   browserLaunchTool,
   browserNavigateTool,
   browserCloseTool,
+  
+  // Browser Safety & Recovery
+  browserNavigateSafeTool,
+  browserHealthCheckTool,
+  browserForceRecreateTool,
   
   // Console & DevTools
   consoleGetLogsTool,
@@ -23,7 +30,13 @@ const TOOLS = [
   
   // Performance Monitoring  
   performanceGetMetricsTool,
-  performanceGetCoreVitalsTool
+  performanceGetCoreVitalsTool,
+  
+  // Storage Inspection
+  storageGetLocalStorageTool,
+  storageGetSessionStorageTool,
+  storageGetCookiesTool,
+  storageClearDataTool
 ];
 
 export async function createMCPServer(server) {

@@ -106,6 +106,28 @@ export const browserNavigateTool = {
   
   async handler(params) {
     try {
+      // Check context health before navigation
+      const attempts = browserManager.navigationGuard.getAttempts(params.contextId);
+      if (attempts >= 2) {
+        return {
+          success: false,
+          data: null,
+          metadata: {
+            timestamp: Date.now(),
+            contextId: params.contextId
+          },
+          error: {
+            code: 'CONTEXT_UNSTABLE',
+            message: `Context has ${attempts} failed attempts. Use browser_navigate_safe or browser_force_recreate for recovery.`,
+            details: { 
+              url: params.url,
+              attempts,
+              suggestion: 'Use browser_navigate_safe for automatic recovery or browser_force_recreate to start fresh'
+            }
+          }
+        };
+      }
+
       const page = await browserManager.createPage(params.contextId);
       const startTime = Date.now();
       
@@ -117,6 +139,9 @@ export const browserNavigateTool = {
       const endTime = Date.now();
       const title = await page.title();
       const finalUrl = page.url();
+
+      // Reset attempts on successful navigation
+      browserManager.navigationGuard.resetAttempts(params.contextId);
 
       return {
         success: true,
@@ -136,18 +161,25 @@ export const browserNavigateTool = {
         error: null
       };
     } catch (error) {
+      // Track failed navigation attempt
+      const attempts = browserManager.navigationGuard.getAttempts(params.contextId);
+      browserManager.navigationGuard.navigationAttempts.set(params.contextId, attempts + 1);
+
       return {
         success: false,
         data: null,
         metadata: {
           timestamp: Date.now(),
-          contextId: params.contextId
+          contextId: params.contextId,
+          attempts: attempts + 1
         },
         error: {
           code: 'NAVIGATION_FAILED',
           message: `Failed to navigate to ${params.url}: ${error.message}`,
           details: { 
             url: params.url,
+            attempts: attempts + 1,
+            suggestion: attempts + 1 >= 2 ? 'Consider using browser_navigate_safe for automatic recovery' : 'Retry or use browser_navigate_safe',
             originalError: error.toString()
           }
         }
