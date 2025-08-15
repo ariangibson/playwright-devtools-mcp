@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "playwright-devtools": {
+      "command": "npx",
+      "args": ["playwright-devtools-mcp"],
+      "env": {
+        "PLAYWRIGHT_HEADLESS": "true",
+        "DEBUG": "playwright-devtools:*"
+      }
+    }
+  }
+}
