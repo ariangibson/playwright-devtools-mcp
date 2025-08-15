@@ -1,11 +1,29 @@
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import { browserLaunchTool, browserNavigateTool, browserCloseTool } from './tools/browser.js';
+import { consoleGetLogsTool, consoleClearLogsTool, consoleEvaluateJavaScriptTool } from './tools/console.js';
+import { networkGetRequestsTool, networkGetFailedRequestsTool, networkClearRequestsTool } from './tools/network.js';
+import { performanceGetMetricsTool, performanceGetCoreVitalsTool } from './tools/performance.js';
 
 // Registry of all available tools
 const TOOLS = [
+  // Browser Management
   browserLaunchTool,
   browserNavigateTool,
-  browserCloseTool
+  browserCloseTool,
+  
+  // Console & DevTools
+  consoleGetLogsTool,
+  consoleClearLogsTool,
+  consoleEvaluateJavaScriptTool,
+  
+  // Network Analysis
+  networkGetRequestsTool,
+  networkGetFailedRequestsTool,
+  networkClearRequestsTool,
+  
+  // Performance Monitoring  
+  performanceGetMetricsTool,
+  performanceGetCoreVitalsTool
 ];
 
 export async function createMCPServer(server) {

@@ -43,21 +43,42 @@ const navResult = await browser_navigate({
 console.log("Page loaded:", navResult.data.title);
 ```
 
-### 2. Analyze the Page (Coming Soon)
+### 2. Analyze the Page ✅
 
 ```javascript
 // Get console logs to identify errors
 const consoleResult = await console_get_logs({
   contextId: launchResult.data.contextId,
-  types: ["error", "warn"],
-  since: Date.now() - 60000 // Last minute
+  types: ["error", "warn", "pageerror"],
+  since: Date.now() - 60000, // Last minute
+  limit: 50
 });
 
-// Monitor network requests
-const networkResult = await network_get_requests({
+console.log("Console errors found:", consoleResult.data.logs.length);
+
+// Monitor network requests and failures
+const networkResult = await network_get_failed_requests({
   contextId: launchResult.data.contextId,
-  status: "failed" // Only failed requests
+  limit: 25
 });
+
+console.log("Failed requests:", networkResult.data.summary);
+
+// Get performance metrics
+const perfResult = await performance_get_metrics({
+  contextId: launchResult.data.contextId,
+  includeResourceTiming: true
+});
+
+console.log("Page load time:", perfResult.data.metrics.navigation.loadComplete);
+
+// Measure Core Web Vitals
+const vitalsResult = await performance_get_core_vitals({
+  contextId: launchResult.data.contextId,
+  timeout: 10000
+});
+
+console.log("Core Web Vitals:", vitalsResult.data.coreVitals);
 ```
 
 ### 3. Clean Up

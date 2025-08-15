@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(cd:*)",
+      "Bash(cd:*)",
+      "Bash(git init:*)"
+    ],
+    "defaultMode": "acceptEdits"
+  }
+}

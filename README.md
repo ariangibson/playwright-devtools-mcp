@@ -81,17 +81,34 @@ await browser_close({
 - **`browser_navigate`** - Navigate to URLs with configurable wait conditions
 - **`browser_close`** - Clean up browser contexts and resources
 
-### DevTools Analysis *(Coming Soon)*
-- **`console_get_logs`** - Collect console messages and errors
-- **`network_get_requests`** - Monitor HTTP requests and responses
-- **`performance_get_metrics`** - Measure Core Web Vitals and timing
+### Console & DevTools ✅
+- **`console_get_logs`** - Collect console messages and errors with filtering
+- **`console_clear_logs`** - Clear stored console data to free memory
+- **`console_evaluate_javascript`** - Execute JavaScript in browser console
+
+### Network Analysis ✅
+- **`network_get_requests`** - Monitor HTTP requests and responses with filtering
+- **`network_get_failed_requests`** - Get failed requests (4xx, 5xx, connection errors)
+- **`network_clear_requests`** - Clear stored network data to free memory
+
+### Performance Monitoring ✅
+- **`performance_get_metrics`** - Collect navigation timing and resource metrics
+- **`performance_get_core_vitals`** - Measure Core Web Vitals (LCP, FID, CLS)
+
+### Security Analysis *(Coming Soon)*
 - **`security_analyze_headers`** - Inspect security configurations
+- **`security_get_certificates`** - SSL/TLS certificate analysis
 
 ## 🔄 Development Status
 
-**Current**: ✅ Core browser management (v0.1.0)  
-**Next**: 🚧 Console & network tools (v0.2.0)  
-**Future**: 📋 Performance & security analysis (v0.3.0)
+**Current**: ✅ Full DevTools suite (v0.2.0)  
+- ✅ Browser management
+- ✅ Console log analysis
+- ✅ Network request monitoring
+- ✅ Performance metrics & Core Web Vitals
+
+**Next**: 🚧 Security analysis tools (v0.3.0)  
+**Future**: 📋 HAR export, advanced debugging features (v0.4.0)
 
 ## 🏗️ Architecture
 
