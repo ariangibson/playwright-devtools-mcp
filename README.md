@@ -81,10 +81,15 @@ await browser_close({
 - **`browser_navigate`** - Navigate to URLs with configurable wait conditions
 - **`browser_close`** - Clean up browser contexts and resources
 
+### Browser Safety & Recovery ✅ *New in v0.2.1!*
+- **`browser_navigate_safe`** - Navigation with automatic retry and context recovery
+- **`browser_health_check`** - Context health validation and auto-healing  
+- **`browser_force_recreate`** - Force recreation of problematic contexts
+
 ### Console & DevTools ✅
 - **`console_get_logs`** - Collect console messages and errors with filtering
 - **`console_clear_logs`** - Clear stored console data to free memory
-- **`console_evaluate_javascript`** - Execute JavaScript in browser console
+- **`console_evaluate_javascript`** - Execute JavaScript in browser console and see results
 
 ### Network Analysis ✅
 - **`network_get_requests`** - Monitor HTTP requests and responses with filtering
@@ -95,20 +100,28 @@ await browser_close({
 - **`performance_get_metrics`** - Collect navigation timing and resource metrics
 - **`performance_get_core_vitals`** - Measure Core Web Vitals (LCP, FID, CLS)
 
+### Storage Inspection ✅ *New in v0.2.1!*
+- **`storage_get_local_storage`** - Get localStorage data with size analysis
+- **`storage_get_session_storage`** - Get sessionStorage data with filtering
+- **`storage_get_cookies`** - Get cookies with security attributes and expiry info
+- **`storage_clear_data`** - Selectively clear storage by type (localStorage, sessionStorage, cookies)
+
 ### Security Analysis *(Coming Soon)*
 - **`security_analyze_headers`** - Inspect security configurations
 - **`security_get_certificates`** - SSL/TLS certificate analysis
 
 ## 🔄 Development Status
 
-**Current**: ✅ Full DevTools suite (v0.2.0)  
-- ✅ Browser management
-- ✅ Console log analysis
-- ✅ Network request monitoring
+**Current**: ✅ Enhanced DevTools + Storage Suite (v0.2.1)  
+- ✅ Browser management with safety features
+- ✅ Console log analysis with JavaScript execution
+- ✅ Network request monitoring  
 - ✅ Performance metrics & Core Web Vitals
+- ✅ Complete storage inspection (localStorage, sessionStorage, cookies)
+- ✅ Browser health checking and auto-recovery
 
-**Next**: 🚧 Security analysis tools (v0.3.0)  
-**Future**: 📋 HAR export, advanced debugging features (v0.4.0)
+**Next**: 🚧 Enhanced network analysis tools (v0.3.0)  
+**Future**: 📋 Security analysis, HAR export, visual debugging (v0.4.0)
 
 ## 🏗️ Architecture
 
