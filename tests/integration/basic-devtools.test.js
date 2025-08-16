@@ -25,7 +25,7 @@ test('DevTools integration flow', async (t) => {
     await t.test('navigation with console logs', async () => {
       const result = await browserNavigateTool.handler({
         contextId,
-        url: 'data:text/html,<script>console.log("Test log"); console.error("Test error");</script><h1>Test Page</h1>',
+        url: 'data:text/html,<title>Test Page</title><script>console.log("Test log"); console.error("Test error");</script><h1>Test Page</h1>',
         waitFor: 'load'
       });
       
