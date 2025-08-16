@@ -3,10 +3,7 @@
 A specialized Model Context Protocol (MCP) server that provides AI models with comprehensive Chrome DevTools access through Playwright. Unlike existing MCP servers focused on basic browser automation, this enables autonomous debugging, performance analysis, and security inspection capabilities.
 
 [![npm version](https://badge.fury.io/js/playwright-devtools-mcp.svg)](https://badge.fury.io/js/playwright-devtools-mcp)
-[![Node.js CI](https://github.com/agibson/playwright-devtools-mcp/workflows/Node.js%20CI/badge.svg)](https://github.com/agibson/playwright-devtools-mcp/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-> **Weekend MVP Project** 🚀 A clean, extensible foundation for AI-powered web debugging. Built for personal use, designed for community contributions.
 
 ## 🚀 What Makes This Different
 
