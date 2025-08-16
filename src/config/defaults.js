@@ -1,7 +1,7 @@
 export const DEFAULT_CONFIG = {
   browser: {
     type: 'chromium',
-    headless: true,
+    headless: false,
     timeout: 30000,
     args: [
       '--no-sandbox',

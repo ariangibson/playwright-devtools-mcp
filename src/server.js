@@ -5,6 +5,7 @@ import { consoleGetLogsTool, consoleClearLogsTool, consoleEvaluateJavaScriptTool
 import { networkGetRequestsTool, networkGetFailedRequestsTool, networkClearRequestsTool } from './tools/network.js';
 import { performanceGetMetricsTool, performanceGetCoreVitalsTool } from './tools/performance.js';
 import { storageGetLocalStorageTool, storageGetSessionStorageTool, storageGetCookiesTool, storageClearDataTool } from './tools/storage.js';
+import { debugTakeScreenshotTool, debugGetPageSourceTool, debugGetElementPropertiesTool, debugGetDomTreeTool } from './tools/debug.js';
 
 // Registry of all available tools
 const TOOLS = [
@@ -36,7 +37,13 @@ const TOOLS = [
   storageGetLocalStorageTool,
   storageGetSessionStorageTool,
   storageGetCookiesTool,
-  storageClearDataTool
+  storageClearDataTool,
+  
+  // Debug & Visual Tools
+  debugTakeScreenshotTool,
+  debugGetPageSourceTool,
+  debugGetElementPropertiesTool,
+  debugGetDomTreeTool
 ];
 
 export async function createMCPServer(server) {

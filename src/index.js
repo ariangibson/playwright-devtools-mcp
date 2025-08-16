@@ -2,7 +2,6 @@
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import { createMCPServer } from './server.js';
 
 async function main() {
@@ -13,7 +12,7 @@ async function main() {
     const server = new Server(
       {
         name: 'playwright-devtools-mcp',
-        version: '0.1.0',
+        version: '0.3.0',
       },
       {
         capabilities: {
@@ -32,6 +31,7 @@ async function main() {
     await server.connect(transport);
     
     console.error('✅ Playwright DevTools MCP Server started successfully');
+    console.error('👀 Browsers will open visibly by default (use headless: true to hide)');
     console.error('🔧 Available tools:');
     console.error('   📱 Browser: browser_launch, browser_navigate, browser_close');
     console.error('   🛡️ Safety: browser_navigate_safe, browser_health_check, browser_force_recreate');
@@ -39,6 +39,7 @@ async function main() {
     console.error('   🌐 Network: network_get_requests, network_get_failed_requests, network_clear_requests');
     console.error('   ⚡ Performance: performance_get_metrics, performance_get_core_vitals');
     console.error('   💾 Storage: storage_get_local_storage, storage_get_session_storage, storage_get_cookies, storage_clear_data');
+    console.error('   🎨 Debug: debug_take_screenshot, debug_get_page_source, debug_get_element_properties, debug_get_dom_tree');
     
   } catch (error) {
     console.error('❌ Failed to start MCP server:', error);

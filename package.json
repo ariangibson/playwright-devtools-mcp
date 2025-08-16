@@ -1,6 +1,6 @@
 {
   "name": "playwright-devtools-mcp",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A specialized MCP server providing AI models with comprehensive Chrome DevTools access through Playwright for autonomous debugging, performance analysis, and security inspection",
   "type": "module",
   "main": "src/index.js",
@@ -39,12 +39,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/playwright-devtools-mcp.git"
+    "url": "git+https://github.com/agibson/playwright-devtools-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/playwright-devtools-mcp/issues"
+    "url": "https://github.com/agibson/playwright-devtools-mcp/issues"
   },
-  "homepage": "https://github.com/your-username/playwright-devtools-mcp#readme",
+  "homepage": "https://github.com/agibson/playwright-devtools-mcp#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.5.0",
     "playwright": "^1.40.0"
@@ -56,6 +56,7 @@
   "files": [
     "src/",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md"
   ]
 }

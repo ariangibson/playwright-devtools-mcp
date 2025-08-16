@@ -9,7 +9,7 @@ export const browserLaunchTool = {
       headless: {
         type: 'boolean',
         description: 'Run browser in headless mode',
-        default: true
+        default: false
       },
       viewport: {
         type: 'object',

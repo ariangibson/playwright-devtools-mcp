@@ -173,8 +173,8 @@ export const performanceGetCoreVitalsTool = {
             measurements: []
           };
 
-          let observers = [];
-          const startTime = Date.now();
+          const observers = [];
+          
 
           // LCP Observer
           if ('PerformanceObserver' in window) {

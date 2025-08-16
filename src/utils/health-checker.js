@@ -44,9 +44,15 @@ export class BrowserHealthChecker {
       }
 
       // Determine overall health
-      if (health.zombiePages > 0 || health.activePages === 0) {
+      if (health.zombiePages > 0) {
         health.isHealthy = false;
-        health.issues.push('Context has unresponsive or no active pages');
+        health.issues.push('Context has unresponsive pages');
+      }
+      
+      // Only consider zero pages unhealthy if there are actual pages that failed
+      if (health.pages > 0 && health.activePages === 0) {
+        health.isHealthy = false;
+        health.issues.push('Context has no responsive pages');
       }
 
       this.healthChecks.set(contextId, health);
@@ -118,7 +124,7 @@ export class BrowserHealthChecker {
   async forceRecreateContext(contextId) {
     try {
       // Get the original context settings if possible
-      const collectors = this.browserManager.getCollectors(contextId);
+      // const collectors = this.browserManager.getCollectors(contextId);
       
       // Close the problematic context
       await this.browserManager.closeContext(contextId);
@@ -214,13 +220,7 @@ export class NavigationGuard {
       });
 
       // Race navigation against a health check
-      const result = await Promise.race([
-        navigationPromise,
-        new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Navigation timeout with health check')), 
-          (options.timeout || 30000) + 5000)
-        )
-      ]);
+      await navigationPromise;
 
       // Verify page is actually responsive after navigation
       await page.evaluate(() => document.readyState);

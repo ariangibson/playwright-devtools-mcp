@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2025-01-16
+
+### 🚀 Major Features Added
+
+#### Visual Debugging Suite ✨ *New Priority Complete!*
+- **`debug_take_screenshot`** - Screenshot capture (viewport OR full-page) with quality options and annotations support
+- **`debug_get_page_source`** - Current DOM state extraction with comprehensive statistics  
+- **`debug_get_dom_tree`** - Structured DOM representation for analysis with depth control and selector targeting
+- **`debug_get_element_properties`** - Deep element inspection (styles, attributes, computed values, dimensions, accessibility)
+
+### 🏗️ Architecture Enhancements
+
+- **Complete element debugging** - Computed styles, viewport visibility, accessibility properties, parent chains
+- **Visual inspection capabilities** - Full-page and viewport screenshots with quality control
+- **DOM analysis tools** - Structured tree representation and source extraction with statistics
+- **Professional packaging** - Clean GitHub release with proper documentation and security guidelines
+
+### 📚 Documentation & Release Preparation
+
+- **Security documentation** - Clear authentication guidelines and security best practices
+- **Professional README** - Comprehensive examples and configuration options
+- **Community-ready** - Clean codebase with ESLint configuration and contributor guidelines
+- **MVP positioning** - Clear weekend project messaging with extension-ready architecture
+
+### 📊 Progress Impact
+
+- **Total Tools**: 22 (up from 18) 
+- **Visual Debugging**: Complete (4/4 core tools implemented)
+- **Overall Progress**: 55% (up from 45%)
+- **Advanced Debugging**: Production-ready visual inspection capabilities
+
 ## [0.2.1] - 2025-01-15
 
 ### 🚀 Major Features Added

@@ -8,7 +8,7 @@ export const browserNavigateSafeTool = {
     properties: {
       contextId: {
         type: 'string',
-        description: 'Browser context ID from browser_launch'
+        description: 'Browser context ID from browser_launch (optional - will create new context if not provided)'
       },
       url: {
         type: 'string',
@@ -37,13 +37,21 @@ export const browserNavigateSafeTool = {
         default: true
       }
     },
-    required: ['contextId', 'url']
+    required: ['url']
   },
 
   async handler(params) {
     const startTime = Date.now();
     
     try {
+      // Auto-create context if not provided
+      let contextId = params.contextId;
+      if (!contextId) {
+        contextId = await browserManager.createContext({
+          viewport: { width: 1280, height: 720 }
+        });
+      }
+
       const options = {
         waitFor: params.waitFor || 'domcontentloaded',
         timeout: params.timeout || 30000,
@@ -52,7 +60,7 @@ export const browserNavigateSafeTool = {
       };
 
       const result = await browserManager.navigationGuard.safeNavigate(
-        params.contextId, 
+        contextId, 
         params.url, 
         options
       );
@@ -65,7 +73,7 @@ export const browserNavigateSafeTool = {
           data: {
             url: result.url,
             title: result.title,
-            contextId: result.useNewContextId || params.contextId,
+            contextId: result.useNewContextId || contextId,
             loadTime: endTime - startTime,
             attempts: result.attempts,
             action: result.action,
@@ -74,8 +82,8 @@ export const browserNavigateSafeTool = {
           metadata: {
             timestamp: Date.now(),
             duration: endTime - startTime,
-            originalContextId: params.contextId,
-            finalContextId: result.useNewContextId || params.contextId,
+            originalContextId: contextId,
+            finalContextId: result.useNewContextId || contextId,
             navigationGuardActive: true
           },
           error: null
@@ -89,17 +97,17 @@ export const browserNavigateSafeTool = {
             maxAttempts: result.maxAttempts,
             action: result.action,
             suggestion: result.suggestion,
-            contextId: params.contextId
+            contextId: contextId
           },
           metadata: {
             timestamp: Date.now(),
             duration: endTime - startTime,
-            contextId: params.contextId,
+            contextId: contextId,
             failureReason: result.action
           },
           error: {
             code: 'SAFE_NAVIGATION_FAILED',
-            message: `Navigation failed after ${result.attempts} attempts: ${result.error || 'Unknown error'}`,
+            message: `Navigation failed after ${result.attempts || 'unknown'} attempts: ${result.error || 'Unknown error'}`,
             details: {
               url: params.url,
               attempts: result.attempts,
@@ -190,7 +198,7 @@ export const browserHealthCheckTool = {
           code: 'HEALTH_CHECK_FAILED',
           message: `Health check failed: ${error.message}`,
           details: {
-            contextId: params.contextId,
+            contextId: contextId,
             originalError: error.toString()
           }
         }
@@ -247,7 +255,7 @@ export const browserForceRecreateTool = {
           },
           metadata: {
             timestamp: Date.now(),
-            contextId: params.contextId
+            contextId: contextId
           },
           error: {
             code: 'CONTEXT_RECREATION_FAILED',
@@ -270,7 +278,7 @@ export const browserForceRecreateTool = {
           code: 'FORCE_RECREATE_ERROR',
           message: `Force recreate failed: ${error.message}`,
           details: {
-            contextId: params.contextId,
+            contextId: contextId,
             originalError: error.toString()
           }
         }
